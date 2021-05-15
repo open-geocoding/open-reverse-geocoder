@@ -1,8 +1,8 @@
 {
-  "name": "open-reverse-geocoder",
+  "name": "@geolonia/open-reverse-geocoder",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./dist/main.js",
   "scripts": {
     "test": "jest test/main.test.ts",
     "lint": "eslint \"src/**/*.ts\" --fix",
