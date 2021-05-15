@@ -1,4 +1,26 @@
+# @geolonia/open-reverse-geocoder
 
+オープンソースかつ無料で利用できる逆ジオコーダーです。
+
+この NPM モジュールを使用すると、緯度経度から都道府県名および市区町村名を検索することができます。
+
+都道府県名および市区町村名を検索するために必要なデータを、ベクトルタイルとして GitHub ページ上にホストしていますので、安心して無料でご利用いただけます。
+
+## インストール方法
+
+```
+$ npm install @geolonia/open-reverse-geocoder -S
+```
+
+## API
+
+```
+const { geocoder } = require(@geolonia/open-reverse-geocoder)
+
+geocoder([139.7673068, 35.6809591]).then(result => {
+  console.log(result) // {"code": "13101", "prefecture": "東京都", "city": "千代田区"}
+})
+```
 
 ## 開発者向け情報
 
