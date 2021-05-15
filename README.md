@@ -6,7 +6,10 @@
 4. 以降、以下のコマンドを順番に実行。
 
 ```
-$ node node bin/optimize-geojson.js > prefs.json
-$ tippecanoe --no-tile-compression --maximum-zoom=10 -l japanese-admins -o prefs.mbtiles prefs.json --force
-$ rm -fr docs/tiles && mb-util --image_format=pbf prefs.mbtiles docs/tiles
+$ wget https://nlftp.mlit.go.jp/ksj/gml/data/N03/N03-2020/N03-20200101_GML.zip
+$ unzip ./N03-20200101_GML.zip
+* ogr2ogr -f GeoJSON admins.json N03-20_200101.shp
+$ NODE_OPTIONS=--max_old_space_size=4096 node bin/optimize-geojson.js > _admins.json
+$ tippecanoe --no-tile-compression --maximum-zoom=10 -l japanese-admins -o admins.mbtiles _admins.json --force
+$ rm -fr docs/tiles && mb-util --image_format=pbf admins.mbtiles docs/tiles
 ```

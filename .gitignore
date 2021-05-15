@@ -1,5 +1,11 @@
-/data
-/prefs.json
-/prefs.mbtiles
+/*.json
+/*.mbtiles
+/*.zip
+/*.xml
+/*.dbf
+/*.geojson
+/*.prj
+/*.shp
+/*.shx
 /docs/tiles/*
 !/docs/tiles/10
