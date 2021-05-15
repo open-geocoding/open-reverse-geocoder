@@ -10,3 +10,12 @@
 /*.shx
 /docs/tiles/*
 !/docs/tiles/10
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+/dist
+
+// Use npm
+yarn.lock
