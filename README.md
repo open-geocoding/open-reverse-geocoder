@@ -6,6 +6,8 @@
 
 都道府県名および市区町村名を検索するために必要なデータを、ベクトルタイルフォーマットで GitHub ページ上にホストしていますので、安心して無料でご利用いただけます。
 
+[![](https://www.evernote.com/l/ABXOGEdc9tdDR4d6ouamQAOEbFcQVloRfBAB/image.png)](https://codepen.io/geolonia/pen/oNZLPQP)
+
 ## インストール方法
 
 ```
