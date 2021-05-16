@@ -25,6 +25,12 @@ const DEFAULT_OPTIONS: ReverseGeocodingOptions = {
   tileUrl: `https://geolonia.github.io/open-reverse-geocoder/tiles/{z}/{x}/{y}.pbf`,
 }
 
+const geocodingResult = {
+  code: '',
+  prefecture: '',
+  city: '',
+}
+
 export const geocoder: (
   input: LngLat,
   options?: Partial<ReverseGeocodingOptions>,
@@ -40,17 +46,15 @@ export const geocoder: (
     .replace('{y}', String(y))
 
   const res = await fetch(tileUrl)
+  if (! res.ok) {
+    throw new Error(`${res.status}: ${res.statusText}`)
+  }
+
   const buffer = await res.buffer()
   const tile = new vt.VectorTile(new Protobuf(buffer))
   let layers = Object.keys(tile.layers)
 
   if (!Array.isArray(layers)) layers = [layers]
-
-  const geocodingResult = {
-    code: '',
-    prefecture: '',
-    city: '',
-  }
 
   layers.forEach((layerID) => {
     const layer = tile.layers[layerID]
