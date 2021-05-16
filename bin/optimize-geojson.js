@@ -1,8 +1,8 @@
-const geojson = require('../admins.json')
+const geojson = require('../tmp/admins.json')
 
 for (let i = 0; i < geojson.features.length; i++) {
     for (const key in geojson.features[i].properties) {
-        if (null === geojson.features[i].properties[key] || '所属未定地' === geojson.features[i].properties[key]) {
+        if (null === geojson.features[i].properties[key] || '所属未定地' === geojson.features[i].properties[key] || geojson.features[i].properties[key].match(/支庁$/)) {
             geojson.features[i].properties[key] = ''
         }
     }
