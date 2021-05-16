@@ -1,9 +1,10 @@
 import { geocoder } from './main'
+import path from 'path'
 
-const lnglat = [139.7673068, 35.6809591]
+const tilePath = path.join(path.dirname(__dirname), 'docs/tiles/{z}/{x}/{y}.pbf')
 
 test('東京駅 [139.7673068, 35.6809591]', async () => {
-  const res = await geocoder([139.7673068, 35.6809591])
+  const res = await geocoder([139.7673068, 35.6809591], { tileUrl: tilePath })
   expect(res).toStrictEqual({
     code: '13101',
     prefecture: '東京都',
@@ -12,7 +13,7 @@ test('東京駅 [139.7673068, 35.6809591]', async () => {
 })
 
 test('大阪駅 [135.4983028, 34.7055051]', async () => {
-  const res = await geocoder([135.4983028, 34.7055051])
+  const res = await geocoder([135.4983028, 34.7055051], { tileUrl: tilePath })
   expect(res).toStrictEqual({
     code: '27127',
     prefecture: '大阪府',
@@ -21,7 +22,7 @@ test('大阪駅 [135.4983028, 34.7055051]', async () => {
 })
 
 test('串本町 [135.781478, 33.472551]', async () => {
-  const res = await geocoder([135.781478, 33.472551])
+  const res = await geocoder([135.781478, 33.472551], { tileUrl: tilePath })
   expect(res).toStrictEqual({
     code: '30428',
     prefecture: '和歌山県',
@@ -30,7 +31,7 @@ test('串本町 [135.781478, 33.472551]', async () => {
 })
 
 test('北海道羅臼町 [145.189681, 44.021866]', async () => {
-  const res = await geocoder([145.189681, 44.021866])
+  const res = await geocoder([145.189681, 44.021866], { tileUrl: tilePath })
   expect(res).toStrictEqual({
     code: '01694',
     prefecture: '北海道',
@@ -39,7 +40,7 @@ test('北海道羅臼町 [145.189681, 44.021866]', async () => {
 })
 
 test('八丈町 [139.785231, 33.115122]', async () => {
-  const res = await geocoder([139.785231, 33.115122])
+  const res = await geocoder([139.785231, 33.115122], { tileUrl: tilePath })
   expect(res).toStrictEqual({
     code: '13401',
     prefecture: '東京都',

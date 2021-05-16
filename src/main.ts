@@ -3,6 +3,8 @@ import { lngLatToGoogle } from 'global-mercator'
 import Protobuf from 'pbf'
 import fetch from 'node-fetch'
 import vt from '@mapbox/vector-tile'
+import { URL } from 'url'
+import { readFileSync } from 'fs'
 
 export interface ReverseGeocodingResult {
   code: string
@@ -31,6 +33,15 @@ const geocodingResult = {
   city: '',
 }
 
+const isUrl = (url: string) => {
+  try {
+    new URL(url)
+    return true
+  } catch(error) {
+    return false
+  }
+}
+
 export const geocoder: (
   input: LngLat,
   options?: Partial<ReverseGeocodingOptions>,
@@ -45,12 +56,17 @@ export const geocoder: (
     .replace('{x}', String(x))
     .replace('{y}', String(y))
 
-  const res = await fetch(tileUrl)
-  if (! res.ok) {
-    throw new Error(`${res.status}: ${res.statusText}`)
+  let buffer
+  if (isUrl(tileUrl)) {
+    const res = await fetch(tileUrl)
+    if (! res.ok) {
+      throw new Error(`${res.status}: ${res.statusText}`)
+    }
+    buffer = await res.buffer()
+  } else {
+    buffer = readFileSync(tileUrl)
   }
 
-  const buffer = await res.buffer()
   const tile = new vt.VectorTile(new Protobuf(buffer))
   let layers = Object.keys(tile.layers)
 
