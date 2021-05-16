@@ -28,3 +28,21 @@ test('串本町 [135.781478, 33.472551]', async () => {
     city: '東牟婁郡串本町',
   })
 })
+
+test('北海道羅臼町 [145.189681, 44.021866]', async () => {
+  const res = await geocoder([145.189681, 44.021866])
+  expect(res).toStrictEqual({
+    code: '01694',
+    prefecture: '北海道',
+    city: '目梨郡羅臼町',
+  })
+})
+
+test('八丈町 [139.785231, 33.115122]', async () => {
+  const res = await geocoder([139.785231, 33.115122])
+  expect(res).toStrictEqual({
+    code: '13401',
+    prefecture: '東京都',
+    city: '八丈支庁八丈町',
+  })
+})
