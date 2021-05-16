@@ -1,4 +1,4 @@
-const geojson = require('../admins.json')
+const geojson = require('../tmp/admins.json')
 
 for (let i = 0; i < geojson.features.length; i++) {
     for (const key in geojson.features[i].properties) {

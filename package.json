@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest src/main.test.ts",
     "lint": "eslint \"src/**/*.ts\" --fix",
-    "build": "rm -rf ./dist && rollup -c ./rollup.config.ts"
+    "build": "rm -rf ./dist && rollup -c ./rollup.config.ts",
+    "build:tiles": "bash bin/build.sh"
   },
   "author": "",
   "license": "MIT",

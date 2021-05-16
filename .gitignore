@@ -18,3 +18,5 @@ yarn-error.log*
 
 // Use npm
 yarn.lock
+
+tmp
