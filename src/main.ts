@@ -2,7 +2,7 @@ import { geoContains } from 'd3-geo'
 import { lngLatToGoogle } from 'global-mercator'
 import Protobuf from 'pbf'
 import fetch from 'node-fetch'
-import vt from '@mapbox/vector-tile'
+import { VectorTile } from '@mapbox/vector-tile'
 import { URL } from 'url'
 import { readFileSync } from 'fs'
 
@@ -67,7 +67,7 @@ export const geocoder: (
     buffer = readFileSync(tileUrl)
   }
 
-  const tile = new vt.VectorTile(new Protobuf(buffer))
+  const tile = new VectorTile(new Protobuf(buffer))
   let layers = Object.keys(tile.layers)
 
   if (!Array.isArray(layers)) layers = [layers]
