@@ -1,10 +1,8 @@
 import { geoContains } from 'd3-geo'
 import { lngLatToGoogle } from 'global-mercator'
 import Protobuf from 'pbf'
-import fetch from 'node-fetch'
+import axios from 'axios'
 import { VectorTile } from '@mapbox/vector-tile'
-import { URL } from 'url'
-import { readFileSync } from 'fs'
 
 export interface ReverseGeocodingResult {
   code: string
@@ -33,15 +31,6 @@ const geocodingResult = {
   city: '',
 }
 
-const isUrl = (url: string) => {
-  try {
-    new URL(url)
-    return true
-  } catch(error) {
-    return false
-  }
-}
-
 export const geocoder: (
   input: LngLat,
   options?: Partial<ReverseGeocodingOptions>,
@@ -57,14 +46,12 @@ export const geocoder: (
     .replace('{y}', String(y))
 
   let buffer
-  if (isUrl(tileUrl)) {
-    const res = await fetch(tileUrl)
-    if (! res.ok) {
-      throw new Error(`${res.status}: ${res.statusText}`)
-    }
-    buffer = await res.buffer()
-  } else {
-    buffer = readFileSync(tileUrl)
+
+  try {
+    const res = await axios.get(tileUrl, { responseType: 'arraybuffer' })
+    buffer =Buffer.from(res.data, 'binary')
+  } catch(error) {
+    throw new Error(error)
   }
 
   const tile = new VectorTile(new Protobuf(buffer))
