@@ -2,10 +2,7 @@ import { geoContains } from 'd3-geo'
 import { lngLatToGoogle } from 'global-mercator'
 import Protobuf from 'pbf'
 import fetch from 'node-fetch'
-
-const vt = require('@mapbox/vector-tile')
-
-const zoom = 10
+import vt from '@mapbox/vector-tile'
 
 export interface ReverseGeocodingResult {
   code: string
@@ -13,17 +10,41 @@ export interface ReverseGeocodingResult {
   city: string
 }
 
-export const geocoder: (input: number[]) => Promise<ReverseGeocodingResult> = async (lnglat: number[]) => {
-  const [x, y] = lngLatToGoogle(lnglat, zoom)
-  const tileUrl = `https://geolonia.github.io/open-reverse-geocoder/tiles/${zoom}/${x}/${y}.pbf`
+type LngLat = [number, number]
+
+export interface ReverseGeocodingOptions {
+  /** どのズームを使うか。デフォルトは 10 */
+  zoomBase: number
+
+  /** タイルが入ってるURLフォーマット。 */
+  tileUrl: string
+}
+
+const DEFAULT_OPTIONS: ReverseGeocodingOptions = {
+  zoomBase: 10,
+  tileUrl: `https://geolonia.github.io/open-reverse-geocoder/tiles/{z}/{x}/{y}.pbf`,
+}
+
+export const geocoder: (
+  input: LngLat,
+  options?: Partial<ReverseGeocodingOptions>,
+) => Promise<ReverseGeocodingResult> = async (lnglat, inputOptions = {}) => {
+  const options: ReverseGeocodingOptions = {
+    ...DEFAULT_OPTIONS,
+    ...inputOptions,
+  }
+  const [x, y] = lngLatToGoogle(lnglat, options.zoomBase)
+  const tileUrl = options.tileUrl
+    .replace('{z}', String(options.zoomBase))
+    .replace('{x}', String(x))
+    .replace('{y}', String(y))
 
   const res = await fetch(tileUrl)
   const buffer = await res.buffer()
-  const tile = new vt.VectorTile(new Protobuf(buffer));
-  var layers = Object.keys(tile.layers);
+  const tile = new vt.VectorTile(new Protobuf(buffer))
+  let layers = Object.keys(tile.layers)
 
-  if (!Array.isArray(layers))
-      layers = [layers]
+  if (!Array.isArray(layers)) layers = [layers]
 
   const geocodingResult = {
     code: '',
@@ -32,21 +53,24 @@ export const geocoder: (input: number[]) => Promise<ReverseGeocodingResult> = as
   }
 
   layers.forEach((layerID) => {
-    var layer = tile.layers[layerID];
+    const layer = tile.layers[layerID]
     if (layer) {
       for (let i = 0; i < layer.length; i++) {
-        const feature = layer.feature(i).toGeoJSON(x, y, zoom)
+        const feature = layer.feature(i).toGeoJSON(x, y, options.zoomBase)
         if (layers.length > 1) feature.properties.vt_layer = layerID
 
         const geojson = {
-          "type": "FeatureCollection",
-          "features": [feature]
+          type: 'FeatureCollection',
+          features: [feature],
         }
 
-        // @ts-ignore
-        const res = geoContains(geojson, lnglat)
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const res = geoContains(geojson as any, lnglat)
         if (res) {
-          geocodingResult.code = (5 === String(feature.id).length) ? String(feature.id) : `0${String(feature.id)}`
+          geocodingResult.code =
+            5 === String(feature.id).length
+              ? String(feature.id)
+              : `0${String(feature.id)}`
           geocodingResult.prefecture = feature.properties.prefecture
           geocodingResult.city = feature.properties.city
         }
