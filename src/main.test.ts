@@ -44,6 +44,6 @@ test('八丈町 [139.785231, 33.115122]', async () => {
   expect(res).toStrictEqual({
     code: '13401',
     prefecture: '東京都',
-    city: '八丈支庁八丈町',
+    city: '八丈町',
   })
 })
