@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>@geolonia/open-reverse-geocoder</title>
+  <style>
+    html, body, #map
+    {
+      margin: 0;
+      padding: 0;
+      width: 100vw;
+      height: 100vh;
+    }
+  </style>
+</head>
+<body>
+  <div
+    id="map"
+    data-lat="35.65810422222222"
+    data-lng="139.74135747222223"
+    data-zoom="10"
+    data-marker="off"
+    data-geolocate-control="on"></div>
+
+  <script type="text/javascript" src="https://cdn.geolonia.com/v1/embed?geolonia-api-key=YOUR-API-KEY"></script>
+  <script>
+    const map = new geolonia.Map('#map')
+  </script>
+</body>
+</html>
