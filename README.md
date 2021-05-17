@@ -58,3 +58,13 @@ $ npm run build:tiles
 4. タイルのプロパティを調整するためのスクリプトを実行。
 5. `tippecanoe` で `*.mbtiles` を作成。意図的に圧縮を無効にしている。
 6. タイルを分解して静的に利用できるようにする。
+
+## 出典
+
+都道府県及び市区町村データについては、国土数値情報の行政区域ポリゴンを使用しています。
+
+https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N03-v2_4.html
+
+## ライセンス
+
+MIT
