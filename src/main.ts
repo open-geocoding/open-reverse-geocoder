@@ -2,6 +2,7 @@ import { geoContains } from 'd3-geo'
 import { lngLatToGoogle } from 'global-mercator'
 import Protobuf from 'pbf'
 import axios from 'axios'
+import { setupCache } from 'axios-cache-adapter'
 import { VectorTile } from '@mapbox/vector-tile'
 
 export interface ReverseGeocodingResult {
@@ -24,6 +25,14 @@ const DEFAULT_OPTIONS: ReverseGeocodingOptions = {
   zoomBase: 10,
   tileUrl: `https://geolonia.github.io/open-reverse-geocoder/tiles/{z}/{x}/{y}.pbf`,
 }
+
+const cache = setupCache({
+  maxAge: 60 * 60 * 24 * 1000
+})
+
+const api = axios.create({
+  adapter: cache.adapter
+})
 
 export const openReverseGeocoder: (
   input: LngLat,
@@ -48,7 +57,7 @@ export const openReverseGeocoder: (
   let buffer
 
   try {
-    const res = await axios.get(tileUrl, { responseType: 'arraybuffer' })
+    const res = await api.get(tileUrl, { responseType: 'arraybuffer' })
     buffer =Buffer.from(res.data, 'binary')
   } catch(error) {
     throw new Error(error)
