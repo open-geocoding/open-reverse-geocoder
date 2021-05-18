@@ -25,12 +25,6 @@ const DEFAULT_OPTIONS: ReverseGeocodingOptions = {
   tileUrl: `https://geolonia.github.io/open-reverse-geocoder/tiles/{z}/{x}/{y}.pbf`,
 }
 
-const geocodingResult = {
-  code: '',
-  prefecture: '',
-  city: '',
-}
-
 export const openReverseGeocoder: (
   input: LngLat,
   options?: Partial<ReverseGeocodingOptions>,
@@ -44,6 +38,12 @@ export const openReverseGeocoder: (
     .replace('{z}', String(options.zoomBase))
     .replace('{x}', String(x))
     .replace('{y}', String(y))
+
+  const geocodingResult = {
+    code: '',
+    prefecture: '',
+    city: '',
+  }
 
   let buffer
 
