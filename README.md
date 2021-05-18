@@ -17,9 +17,9 @@ $ npm install @geolonia/open-reverse-geocoder -S
 ## API
 
 ```
-const { geocoder } = require(@geolonia/open-reverse-geocoder)
+const { openReverseGeocoder } = require(@geolonia/open-reverse-geocoder)
 
-geocoder([139.7673068, 35.6809591]).then(result => {
+openReverseGeocoder([139.7673068, 35.6809591]).then(result => {
   console.log(result) // {"code": "13101", "prefecture": "東京都", "city": "千代田区"}
 })
 ```
@@ -27,9 +27,9 @@ geocoder([139.7673068, 35.6809591]).then(result => {
 または
 
 ```
-const { geocoder } = require(@geolonia/open-reverse-geocoder)
+const { openReverseGeocoder } = require(@geolonia/open-reverse-geocoder)
 
-const result = await geocoder([139.7673068, 35.6809591])
+const result = await openReverseGeocoder([139.7673068, 35.6809591])
 console.log(result) // {"code": "13101", "prefecture": "東京都", "city": "千代田区"}
 ```
 

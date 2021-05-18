@@ -31,7 +31,7 @@ const geocodingResult = {
   city: '',
 }
 
-export const geocoder: (
+export const openReverseGeocoder: (
   input: LngLat,
   options?: Partial<ReverseGeocodingOptions>,
 ) => Promise<ReverseGeocodingResult> = async (lnglat, inputOptions = {}) => {

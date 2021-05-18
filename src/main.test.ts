@@ -1,4 +1,4 @@
-import { geocoder } from './main'
+import { openReverseGeocoder as geocoder } from './main'
 
 test('東京駅 [139.7673068, 35.6809591]', async () => {
   const res = await geocoder([139.7673068, 35.6809591])
