@@ -51,6 +51,12 @@ $ git clone git@github.com:geolonia/open-reverse-geocoder.git
 $ cd open-reverse-geocoder
 ```
 
+タイルデータを用意するコマンドを実行するために必要な以下のツール群をインストールする。
+
+- ogr2ogr (macOS の場合は `brew install gdal` でインストールできます)
+- tippercanoe (macOS の場合は `brew install tippecanoe` でインストールできます)
+- mb-util (インストール方法については https://github.com/mapbox/mbutil#installation を参照)
+
 その後、以下のコマンドを実行すること。
 
 ```
@@ -61,7 +67,7 @@ $ npm run build:tiles
 
 1. まず国土数値情報から、最新の行政区域データをダウンロードする。最新版は URL が変わるので注意。
 2. 解凍
-3. `ogr2ogr` で GeoJSON に変換。ファイル名に注意。 (macOS の場合は `brew install gdal` でインストールできます)
+3. `ogr2ogr` で GeoJSON に変換。ファイル名に注意。
 4. タイルのプロパティを調整するためのスクリプトを実行。
 5. `tippecanoe` で `*.mbtiles` を作成。意図的に圧縮を無効にしている。
 6. タイルを分解して静的に利用できるようにする。
