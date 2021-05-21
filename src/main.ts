@@ -19,11 +19,15 @@ export interface ReverseGeocodingOptions {
 
   /** タイルが入ってるURLフォーマット。 */
   tileUrl: string
+
+  // 検索するレイヤーのID
+  layer: string
 }
 
 const DEFAULT_OPTIONS: ReverseGeocodingOptions = {
   zoomBase: 10,
   tileUrl: `https://geolonia.github.io/open-reverse-geocoder/tiles/{z}/{x}/{y}.pbf`,
+  layer: 'japanese-admins'
 }
 
 const cache = setupCache({
@@ -70,7 +74,7 @@ export const openReverseGeocoder: (
 
   layers.forEach((layerID) => {
     const layer = tile.layers[layerID]
-    if (layer) {
+    if (layer && (options.layer === layer.name)) {
       for (let i = 0; i < layer.length; i++) {
         const feature = layer.feature(i).toGeoJSON(x, y, options.zoomBase)
         if (layers.length > 1) feature.properties.vt_layer = layerID
