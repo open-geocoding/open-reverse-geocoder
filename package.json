@@ -3,6 +3,9 @@
   "version": "0.0.7",
   "description": "",
   "main": "./dist/main.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "test": "jest src/main.test.ts",
     "lint": "eslint \"src/**/*.ts\" --fix",
