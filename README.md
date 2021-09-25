@@ -39,45 +39,6 @@ const { openReverseGeocoder } = require(@geolonia/open-reverse-geocoder)
 const result = await openReverseGeocoder([139.7673068, 35.6809591])
 console.log(result) // {"code": "13101", "prefecture": "東京都", "city": "千代田区"}
 ```
-
-## 開発者向け情報
-
-### タイルのビルド方法
-
-まず、このリポジトリをクローンする。
-
-```
-$ git clone git@github.com:geolonia/open-reverse-geocoder.git
-$ cd open-reverse-geocoder
-```
-
-タイルデータを用意するコマンドを実行するために必要な以下のツール群をインストールする。
-
-- ogr2ogr (macOS の場合は `brew install gdal` でインストールできます)
-- tippercanoe (macOS の場合は `brew install tippecanoe` でインストールできます)
-- mb-util (インストール方法については https://github.com/mapbox/mbutil#installation を参照)
-
-その後、以下のコマンドを実行すること。
-
-```
-$ npm run build:tiles
-```
-
-#### 上述のコマンドの解説
-
-1. まず国土数値情報から、最新の行政区域データをダウンロードする。最新版は URL が変わるので注意。
-2. 解凍
-3. `ogr2ogr` で GeoJSON に変換。ファイル名に注意。
-4. タイルのプロパティを調整するためのスクリプトを実行。
-5. `tippecanoe` で `*.mbtiles` を作成。意図的に圧縮を無効にしている。
-6. タイルを分解して静的に利用できるようにする。
-
-## 出典
-
-都道府県及び市区町村データについては、国土数値情報の行政区域ポリゴンを使用しています。
-
-https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N03-v2_4.html
-
 ## ライセンス
 
 MIT
