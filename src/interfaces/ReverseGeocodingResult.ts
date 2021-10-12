@@ -19,3 +19,14 @@ export interface ReverseGeocodingResultJP extends ReverseGeocodingResult {
   prefecture: string
   city: string
 }
+
+/**
+ * Interface of reverse geocoding result for Rwanda
+ */
+export interface ReverseGeocodingResultRW extends ReverseGeocodingResult {
+  province: string
+  district: string
+  sector: string
+  cell: string
+  village: string
+}

@@ -8,7 +8,7 @@
     "dist"
   ],
   "scripts": {
-    "test": "jest src/main.test.ts",
+    "test": "jest",
     "lint": "eslint \"src/**/*.ts\" --fix",
     "prepare": "npm run build",
     "build": "rm -rf ./dist && rollup -c ./rollup.config.ts",
@@ -50,6 +50,12 @@
       "ts-jest": {
         "tsconfig": "tsconfig.json"
       }
+    },
+    "testMatch": [
+      "**/tests/**/*.test.ts"
+    ],
+    "moduleNameMapper": {
+      "^#/(.+)": "<rootDir>/src/$1"
     }
   },
   "dependencies": {

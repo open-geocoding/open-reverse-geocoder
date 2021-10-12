@@ -2,6 +2,7 @@ import {
   ReverseGeocodingOptions,
   ReverseGeocodingResultCountry,
   ReverseGeocodingResultJP,
+  ReverseGeocodingResultRW,
 } from './interfaces'
 
 /**
@@ -36,6 +37,22 @@ const countryOptions: { [s: string]: ReverseGeocodingOptions } = {
             : `0${String(feature.id)}`,
         prefecture: feature.properties?.prefecture,
         city: feature.properties?.city,
+      }
+      return res
+    },
+  },
+  RW: {
+    zoomBase: 14,
+    tileUrl: `https://open-geocoding.github.io/open-reverse-geocoder-rw/tiles/{z}/{x}/{y}.pbf`,
+    layer: 'rw_villages',
+    getResult: function (feature: GeoJSON.Feature) {
+      const res: ReverseGeocodingResultRW = {
+        code: feature.properties?.village_id,
+        province: feature.properties?.province,
+        district: feature.properties?.district,
+        sector: feature.properties?.sector,
+        cell: feature.properties?.cell,
+        village: feature.properties?.village,
       }
       return res
     },
