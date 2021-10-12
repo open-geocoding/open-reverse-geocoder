@@ -44,3 +44,9 @@ test('八丈町 [139.785231, 33.115122]', async () => {
     city: '八丈町',
   })
 })
+
+test('London [-0.13637, 51.50334]', async () => {
+  await expect(geocoder([-0.13637, 51.50334])).rejects.toThrow(
+    'This service location is not currently available.',
+  )
+})

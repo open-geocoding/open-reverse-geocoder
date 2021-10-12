@@ -21,7 +21,7 @@ Geolonia which develop this package does not collect any privacy information bec
 
 また、GitHub ページ上にホストしたベクトルタイルを使用して都道府県名と市区町村を取得するという仕様のため、このモジュールを開発する Geolonia では個人情報の収集を一切行っておらず、安心してご利用ただけます。
 
-## Structure / 組み
+## Structure / 仕組み
 
 1. get the tile number equivalent to zoom level 10 (about 30 km square) on the client side based on the latitude and longitude specified as arguments of `openReverseGeocoder()`, and download the vector tiles from the web server with AJAX.
 2. retrieves the polygons with the specified latitude and longitude from the polygons of cities contained in the vector tiles downloaded by AJAX on the client side, and returns the name of the prefecture and the name of the city.
