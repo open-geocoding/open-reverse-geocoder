@@ -5,6 +5,7 @@ describe('Tests for DRC', () => {
     const res = await geocoder([23.0429, -4.3292])
     expect(res).toStrictEqual({
       code: 'CD8306',
+      country: 'République Démocratique du Congo',
       province: 'Sankuru',
       district: 'Kole',
     })
