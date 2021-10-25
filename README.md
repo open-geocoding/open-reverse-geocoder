@@ -26,6 +26,7 @@ Geolonia which develop this package does not collect any privacy information bec
 This reverse geocoding covers following countries.
 
 - Japan
+- DRC Congo
 - Rwanda
 
 ## Structure / 仕組み
