@@ -5,6 +5,7 @@ describe('Tests for Rwanda', () => {
     const res = await geocoder([30.059708, -1.946116])
     expect(res).toStrictEqual({
       code: '11090307',
+      country: 'Rwanda',
       province: 'Kigali Town/Umujyi wa Kigali',
       district: 'Nyarugenge',
       sector: 'Nyarugenge',
@@ -17,6 +18,7 @@ describe('Tests for Rwanda', () => {
     const res = await geocoder([29.246949, -1.685539])
     expect(res).toStrictEqual({
       code: '33040312',
+      country: 'Rwanda',
       province: 'West/Iburengerazuba',
       district: 'Rubavu',
       sector: 'Gisenyi',

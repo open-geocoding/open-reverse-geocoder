@@ -2,6 +2,7 @@ import {
   ReverseGeocodingOptions,
   ReverseGeocodingResultCountry,
   ReverseGeocodingResultJP,
+  ReverseGeocodingResultCD,
   ReverseGeocodingResultRW,
 } from './interfaces'
 
@@ -41,6 +42,20 @@ const countryOptions: { [s: string]: ReverseGeocodingOptions } = {
       return res
     },
   },
+  CD: {
+    zoomBase: 12,
+    tileUrl: `https://open-geocoding.github.io/open-reverse-geocoder-cd/tiles/{z}/{x}/{y}.pbf`,
+    layer: 'cd_districts',
+    getResult: function (feature: GeoJSON.Feature) {
+      const res: ReverseGeocodingResultCD = {
+        code: feature.properties?.adm2_pcode,
+        country: feature.properties?.adm0_fr,
+        province: feature.properties?.adm1_fr,
+        district: feature.properties?.adm2_fr,
+      }
+      return res
+    },
+  },
   RW: {
     zoomBase: 14,
     tileUrl: `https://open-geocoding.github.io/open-reverse-geocoder-rw/tiles/{z}/{x}/{y}.pbf`,
@@ -48,6 +63,7 @@ const countryOptions: { [s: string]: ReverseGeocodingOptions } = {
     getResult: function (feature: GeoJSON.Feature) {
       const res: ReverseGeocodingResultRW = {
         code: feature.properties?.village_id,
+        country: 'Rwanda',
         province: feature.properties?.province,
         district: feature.properties?.district,
         sector: feature.properties?.sector,

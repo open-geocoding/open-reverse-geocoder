@@ -21,9 +21,19 @@ export interface ReverseGeocodingResultJP extends ReverseGeocodingResult {
 }
 
 /**
+ * Interface of reverse geocoding result for DRC Congo
+ */
+export interface ReverseGeocodingResultCD extends ReverseGeocodingResult {
+  country: string
+  province: string
+  district: string
+}
+
+/**
  * Interface of reverse geocoding result for Rwanda
  */
 export interface ReverseGeocodingResultRW extends ReverseGeocodingResult {
+  country: string
   province: string
   district: string
   sector: string
