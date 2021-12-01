@@ -20,7 +20,7 @@ jobs:
       - name: Build parent package
         run:
           npm ci
-          pm run build
+          npm run build
       - name: Build demo page
         working-directory: ./demo
         run: |
