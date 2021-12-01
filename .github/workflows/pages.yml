@@ -1,4 +1,4 @@
-name: Publish demo page
+name: Publish GitHub Pages
 
 on:
   push:
@@ -7,17 +7,26 @@ on:
       - add-demo
 
 jobs:
-  publish:
+  publish_gh_pages:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 1
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16.x
       - name: Build parent package
-        run: npm ci && npm run build
+        run:
+          npm ci
+          pm run build
       - name: Build demo page
         working-directory: ./demo
-        run: npm ci && npm run build && npm run export
+        run: |
+          npm ci
+          npm run build
+          npm run export
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
