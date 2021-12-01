@@ -16,7 +16,8 @@ jobs:
       - name: Build parent package
         run: npm ci && npm run build
       - name: Build demo page
-        run: cd demo && npm ci && npm run build && npm run export
+        working-directory: ./demo
+        run: npm ci && npm run build && npm run export
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
