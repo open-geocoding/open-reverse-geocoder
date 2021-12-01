@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - add-demo
 
 jobs:
   publish:
